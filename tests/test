@@ -1,0 +1,6 @@
+#!/bin/bash
+export PATH=/home/nitrotrigger/LABS/LAMP/php7/php/bin:$PATH
+
+# php() { CUSTOM_PHP  $@; }; export -f php; ./script.sh ; unset -f php
+
+phpunit -c phpunit.xml

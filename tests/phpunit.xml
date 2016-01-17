@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="../bootstrap.inc" colors="true"
+	printerFile="tests/results/ResultPrinter.php"
+	beStrictAboutTestsThatDoNotTestAnything="true"
+	columns="67"
+	verbose="true"
+	topOnFailure="true">
+	<php>
+		<const name="FS_TEST_LOG_LEVEL" value="7"/>
+		<const name="FS_TEST_LOG_LOCATION" value="~/.HOWI/tmp/libhowi-filesystem/log/phpunit_test.log"/>
+		<const name="FS_TEST_LOCATION" value="~/.HOWI/tmp/libhowi-filesystem"/>
+	</php>
+	<testsuites>
+		<testsuite name="InitTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/InitTests.inc</file>
+		</testsuite>
+		<testsuite name="DirectoryTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/DirectoryTests.inc</file>
+		</testsuite>
+		<testsuite name="DirectoryTreeTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/DirectoryTreeTests.inc</file>
+		</testsuite>
+		<testsuite name="FileTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/FileTests.inc</file>
+		</testsuite>
+		<testsuite name="InfoTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/InfoTests.inc</file>
+		</testsuite>
+		<testsuite name="TmpTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/TmpTests.inc</file>
+		</testsuite>
+		<testsuite name="TmpTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/LinkTests.inc</file>
+		</testsuite>
+		<testsuite name="FilesystemTests">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">CleanTests/FilesystemTests.inc</file>
+		</testsuite>
+		
+	<!-- 	<testsuite name="php5-GeneralTest">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/GeneralTest.inc</file>
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/FSTest.inc</file>
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/ResponseTraitTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-Conversion">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/TraitForConversionTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-DirectoryInterface">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/directoryObjectTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-FilesystemInterface">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/FilesystemInterfaceTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-FSIterator">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/directoryIteratorObjectTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-infoObjectInterfaceTest">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/infoObjectInterfaceTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-FSFileObjectInterface">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/fileObjectInterfaceTest.inc</file>
+		</testsuite>
+		<testsuite name="php5-Link">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/LinkTest.inc</file>
+		</testsuite> -->
+		<!-- <testsuite name="php5-LogTest">
+			<file phpVersion="5.4.0"
+				phpVersionOperator=">=">php5/LogTest.inc</file>
+		</testsuite> -->
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".inc">../Commons</directory>
+			<directory suffix=".inc">../php5</directory>
+			<file>../bootstrap.inc</file>
+			<file>../FS.inc</file>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html" target="phpunit/report" lowUpperBound="35"
+			highLowerBound="70" />
+		<log type="json" target="phpunit/log/logfile.json" />
+		<log type="junit" target="phpunit/log/logfile.xml"
+			logIncompleteSkipped="false" />
+		<log type="testdox-html" target="phpunit/testdox.html" />
+	</logging>
+</phpunit>

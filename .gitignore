@@ -1,4 +1,4 @@
-tests/
+tests/phpunit/*
 .project
 composer.phar
 vendor/
