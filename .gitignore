@@ -1,3 +1,5 @@
+tests/
+.project
 composer.phar
 vendor/
 
