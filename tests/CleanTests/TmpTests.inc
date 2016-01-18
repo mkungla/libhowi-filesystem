@@ -40,7 +40,7 @@ class TmpTests extends PHPUnit_Framework_TestCase
         
         $this->FS->dir('tmp',FS_TEST_LOCATION);
         $this->assertTrue($this->FS->tmp()
-            ->setTmp('~/.HOWI/tmp/libhowi-filesystem/tmp'));
+            ->setTmp('~/HOWI3/tmp/libhowi-filesystem/tmp'));
         $this->assertInternalType('string',$this->FS->tmp()
             ->getTmp());
     }
@@ -49,7 +49,7 @@ class TmpTests extends PHPUnit_Framework_TestCase
     {
         
         $this->assertTrue($this->FS->tmp()
-        ->setTmp('~/.HOWI/tmp/libhowi-filesystem/tmp'));
+        ->setTmp('~/HOWI3/tmp/libhowi-filesystem/tmp'));
         
       
         
@@ -64,7 +64,7 @@ class TmpTests extends PHPUnit_Framework_TestCase
     public function test_tmpfile()
     {
         $this->assertTrue($this->FS->tmp()
-        ->setTmp('~/.HOWI/tmp/libhowi-filesystem/tmp'));
+        ->setTmp('~/HOWI3/tmp/libhowi-filesystem/tmp'));
         
         $tmpfile = $this->FS->tmp()->tmpfile();
         $this->assertInternalType('resource',$tmpfile);

@@ -1,6 +1,6 @@
 <?php
 use HOWI3\libhowi\Filesystem\FS;
-use HOWI3\libhowi\Filesystem\php5\Objects\DirectoryTreeObject as DirectoryTreeObject;
+
 
 class DirectoryTreeTests extends PHPUnit_Framework_TestCase
 {
@@ -56,17 +56,17 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     {
         
         
-        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\php5\Objects\DirectoryTreeObject', 
-            $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp')
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface', 
+            $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp')
                 ->c('log'));
-        $this->assertFalse($this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp')
+        $this->assertFalse($this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp')
             ->c('logs'), 'logs does not exist');
     }
 
     public function test_hasChildren()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->FS->dir('archives', FS_TEST_LOCATION);
         $this->FS->dir('log', FS_TEST_LOCATION);
         
@@ -115,17 +115,17 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     {
         
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         /* Move pointer to log drectory */
         $this->FS->dir('libhowi-filesystem')->seek(2);
         
         /* Behaves same as c($basename) but you call it on pointer instead */
-        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\php5\Objects\DirectoryTreeObject', 
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface', 
             $this->FS->dir('libhowi-filesystem')
                 ->getChildren());
         
-        $from_c = $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp')
+        $from_c = $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp')
             ->c('log')
             ->getBasename();
         /* As we revind our first item will be log */
@@ -141,7 +141,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     {
         
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
             ->getSubPath());
         
@@ -155,7 +155,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     {
         
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
             ->getSubPath());
         
@@ -168,7 +168,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_current()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface', 
             $this->FS->dir('libhowi-filesystem')
@@ -183,7 +183,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_key()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
             ->key());
     }
@@ -191,24 +191,33 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getFlags()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getFlags());
     }
 
     public function test_setFlags()
     {
+            //
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
+        if(PHP_VERSION_ID >= 70000)
+        {
+            $this->assertNull(
+                $this->FS->dir('libhowi-filesystem')
+                ->setFlags(\HOWI3\libhowi\Filesystem\php7\Objects\DirectoryTreeObject::SKIP_DOTS));
+        }
+        else {
+            $this->assertNull(
+                $this->FS->dir('libhowi-filesystem')
+                ->setFlags(\HOWI3\libhowi\Filesystem\php5\Objects\DirectoryTreeObject::SKIP_DOTS));
+        }
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
-        $this->assertNull(
-            $this->FS->dir('libhowi-filesystem')
-                ->setFlags(DirectoryTreeObject::SKIP_DOTS));
     }
 
     public function test_getFilename()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertEquals('phpunit_test.log', 
             $this->FS->dir('libhowi-filesystem')
@@ -219,7 +228,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getExtension()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertEquals('log', 
             $this->FS->dir('libhowi-filesystem')
@@ -230,7 +239,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getBasename()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertEquals('phpunit_test.log', 
             $this->FS->dir('libhowi-filesystem')
@@ -252,7 +261,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test___toString()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertEquals($this->FS->dir('libhowi-filesystem')
             ->getFilename(), $this->FS->dir('libhowi-filesystem')
@@ -262,8 +271,8 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getPath()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
-        $this->assertEquals(getenv('HOME') . '/.HOWI/tmp/libhowi-filesystem/log', 
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
+        $this->assertEquals(getenv('HOME') . '/HOWI3/tmp/libhowi-filesystem/log', 
             $this->FS->dir('libhowi-filesystem')
                 ->c('log')
                 ->getPath(), 'Failed to assert iterator getPath');
@@ -272,9 +281,9 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getPathName()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
-        $this->assertEquals(getenv('HOME') . '/.HOWI/tmp/libhowi-filesystem/log/phpunit_test.log', 
+        $this->assertEquals(getenv('HOME') . '/HOWI3/tmp/libhowi-filesystem/log/phpunit_test.log', 
             $this->FS->dir('libhowi-filesystem')
                 ->c('log')
                 ->getPathName(), 'Failed to assert iterator getPath');
@@ -283,16 +292,16 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getPerms()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertEquals(750, $this->FS->dir('libhowi-filesystem')
-            ->getPerms(), '~/.HOWI/tmp/libhowi-filesystem permissions should be 0755');
+            ->getPerms(), '~/HOWI3/tmp/libhowi-filesystem permissions should be 0755');
     }
 
     public function test_getInode()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getInode());
@@ -301,7 +310,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getSize()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getSize());
@@ -321,30 +330,30 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getOwner()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $userID = getmyuid();
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getOwner());
         $this->assertEquals($userID, $this->FS->dir('libhowi-filesystem')
-            ->getOwner(), '~/.HOWI/tmp/libhowi-filesystem owner should match with current users ID');
+            ->getOwner(), '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
     }
 
     public function test_getGroup()
     {
         // filegroup($filename = false);
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $group = getmygid();
         
         $this->assertEquals($group, $this->FS->dir('libhowi-filesystem')
-            ->getGroup(), '~/.HOWI/tmp/libhowi-filesystem group should match with current users group');
+            ->getGroup(), '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
     }
 
     public function test_getATime()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getATime(), 'Default getAccessTime must be a int');
@@ -361,7 +370,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getMTime()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getMTime(), 'Default getModifTime must be a int');
@@ -378,7 +387,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getCTime()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
             ->getCTime(), 'Default getAccessTime must be a int');
@@ -400,7 +409,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getType()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('string', 
             $this->FS->dir('libhowi-filesystem')
@@ -422,7 +431,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isWritable()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertTrue($this->FS->dir('libhowi-filesystem')
             ->isWritable());
@@ -431,7 +440,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isReadable()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertTrue($this->FS->dir('libhowi-filesystem')
             ->isReadable());
@@ -440,7 +449,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isExecutable()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertFalse(
             $this->FS->dir('libhowi-filesystem')
@@ -454,7 +463,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isFile()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertFalse($this->FS->dir('libhowi-filesystem')
             ->isFile());
@@ -467,7 +476,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isDir()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertTrue($this->FS->dir('libhowi-filesystem')
             ->isDir());
@@ -480,7 +489,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_isLink()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertFalse($this->FS->dir('libhowi-filesystem')
             ->isLink());
@@ -489,7 +498,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getRealpath()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
             ->getRealpath());
     }
@@ -497,7 +506,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getFileInfo()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface', 
             $this->FS->dir('libhowi-filesystem')
@@ -507,7 +516,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getPathInfo()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface', 
             $this->FS->dir('libhowi-filesystem')
@@ -517,7 +526,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_openFile()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertFalse($this->FS->dir('libhowi-filesystem')
             ->openFile());
         
@@ -530,7 +539,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_setFileClass()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertTrue(
             $this->FS->dir('libhowi-filesystem')
@@ -544,17 +553,28 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
                 ->current()
                 ->setFileClass('\SplFileObjectNonExisting'));
         
-        $this->assertTrue(
+       
+        if(PHP_VERSION_ID >= 70000)
+        {
+            $this->assertTrue(
+            $this->FS->dir('libhowi-filesystem')
+                ->c('log')
+                ->current()
+                ->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject'));
+        }
+        else {
+             $this->assertTrue(
             $this->FS->dir('libhowi-filesystem')
                 ->c('log')
                 ->current()
                 ->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject'));
+        }
     }
 
     public function test_setInfoClass()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertTrue(
             $this->FS->dir('libhowi-filesystem')
@@ -568,17 +588,28 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
                 ->current()
                 ->setInfoClass('\SplFileInfoNonExisting'));
         
-        $this->assertTrue(
+        if(PHP_VERSION_ID >= 70000)
+        {
+            $this->assertTrue(
+            $this->FS->dir('libhowi-filesystem')
+                ->c('log')
+                ->current()
+                ->setInfoClass('\HOWI3\libhowi\Filesystem\php7\Objects\InfoObject'));
+        }
+        else {
+            $this->assertTrue(
             $this->FS->dir('libhowi-filesystem')
                 ->c('log')
                 ->current()
                 ->setInfoClass('\HOWI3\libhowi\Filesystem\php5\Objects\InfoObject'));
+        }
+        
     }
 
     public function test_getCwd()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertEquals(dirname(__DIR__), $this->FS->dir('libhowi-filesystem')
             ->getCwd());
     }
@@ -586,14 +617,14 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_ls()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
        
         /**
          * tmp link
          */
-        $target = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos');
-        $link = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos-link');
+        $target = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos');
+        $link = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos-link');
         symlink($target, $link);
         
         $this->assertInternalType('array', $this->FS->dir('libhowi-filesystem')
@@ -620,11 +651,11 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         /**
          * tmp link
          */
-        $target = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos');
-        $link = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos-link');
+        $target = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos');
+        $link = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos-link');
         symlink($target, $link);
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $this->assertInternalType('array', $this->FS->dir('libhowi-filesystem')
             ->lsInfo());
@@ -647,11 +678,11 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
 
     public function test_lsTree()
     {
-        $target = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos');
-        $link = $this->FS->makeAbsolute('~/.HOWI/tmp/libhowi-filesystem/videos-link');
+        $target = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos');
+        $link = $this->FS->makeAbsolute('~/HOWI3/tmp/libhowi-filesystem/videos-link');
         symlink($target, $link);
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
                 
         $this->assertInternalType('array', $this->FS->dir('libhowi-filesystem')
             ->lsTree());
@@ -662,30 +693,30 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_getOwnerName()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $username = posix_getpwuid(getmyuid())['name'];
         $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
             ->getOwnerName());
         $this->assertEquals($username, $this->FS->dir('libhowi-filesystem')
-            ->getOwnerName(), '~/.HOWI/tmp/libhowi-filesystem owners name should match with current users name');
+            ->getOwnerName(), '~/HOWI3/tmp/libhowi-filesystem owners name should match with current users name');
     }
     
     public function test_getGroupName()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $group = posix_getgrgid(getmygid())['name'];
     
         $this->assertEquals($group, $this->FS->dir('libhowi-filesystem')
-            ->getGroupName(), '~/.HOWI/tmp/libhowi-filesystem group should match with current users group');
+            ->getGroupName(), '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
     }
     
     public function test_isDot()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         $this->assertFalse($this->FS->dir('libhowi-filesystem')
             ->isDot());
     }
@@ -693,9 +724,9 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
     public function test_functions()
     {
         
-        $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+        $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
-        $methods = get_class_methods($this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp'));
+        $methods = get_class_methods($this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp'));
         
         foreach ($methods as $method) {
             $skip = array(

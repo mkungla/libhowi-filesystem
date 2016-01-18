@@ -69,7 +69,7 @@ interface FileInterface
      *            
      * @return bool Returns TRUE on success or FALSE on failure.
      */
-    public function flock($operation, $wouldblock = false);
+    public function flock($operation, &$wouldblock = null);
 
     /**
      * FileObject does not have children

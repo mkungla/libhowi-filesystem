@@ -37,7 +37,7 @@ class DirectoryTests extends PHPUnit_Framework_TestCase
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir('photos', '~/.HOWI/tmp/libhowi-filesystem/images'));
+            $this->FS->dir('photos', '~/HOWI3/tmp/libhowi-filesystem/images'));
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(701, $this->FS->getCode());
         
@@ -45,28 +45,28 @@ class DirectoryTests extends PHPUnit_Framework_TestCase
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir('png', '~/.HOWI/tmp/libhowi-filesystem/images'));
+            $this->FS->dir('png', '~/HOWI3/tmp/libhowi-filesystem/images'));
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(701, $this->FS->getCode());
         
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir('gif', '~/.HOWI/tmp/libhowi-filesystem/images'));
+            $this->FS->dir('gif', '~/HOWI3/tmp/libhowi-filesystem/images'));
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(701, $this->FS->getCode());
         
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir('jpg', '~/.HOWI/tmp/libhowi-filesystem/images'));
+            $this->FS->dir('jpg', '~/HOWI3/tmp/libhowi-filesystem/images'));
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(701, $this->FS->getCode());
         
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir('raw', '~/.HOWI/tmp/libhowi-filesystem/images'));
+            $this->FS->dir('raw', '~/HOWI3/tmp/libhowi-filesystem/images'));
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(701, $this->FS->getCode());
         
@@ -97,7 +97,7 @@ class DirectoryTests extends PHPUnit_Framework_TestCase
         
         $this->assertInstanceOf(
             '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryPlaceholderInterface',
-            $this->FS->dir('pdf', '~/.HOWI/tmp/libhowi-filesystem/doc', false));
+            $this->FS->dir('pdf', '~/HOWI3/tmp/libhowi-filesystem/doc', false));
         $this->assertFalse($this->FS->getStatus());
         $this->assertEquals(502, $this->FS->getCode());
         

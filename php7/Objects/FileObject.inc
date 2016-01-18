@@ -21,11 +21,11 @@
  ********************************************************************
  * Comments:
  */
-namespace HOWI3\libhowi\Filesystem\php5\Objects;
+namespace HOWI3\libhowi\Filesystem\php7\Objects;
 
 use \SplFileObject;
 use \HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\FileInterface;
-use \HOWI3\libhowi\Filesystem\php5\TraitForSharedMethods;
+use \HOWI3\libhowi\Filesystem\php7\TraitForSharedMethods;
 
 class FileObject extends SplFileObject implements FileInterface
 {
@@ -46,7 +46,7 @@ class FileObject extends SplFileObject implements FileInterface
      * {@inheritDoc}
      *
      */
-     public function flock($operation, &$wouldblock = NULL)
+    public function flock($operation, &$wouldblock = NULL)
     {
         return ! $wouldblock ? parent::flock($operation) : parent::flock($operation, $wouldblock);
     }

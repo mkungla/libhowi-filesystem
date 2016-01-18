@@ -21,20 +21,20 @@
  ********************************************************************
  * Comments:
  */
-namespace HOWI3\libhowi\Filesystem\php5;
+namespace HOWI3\libhowi\Filesystem\php7;
 
 use \HOWI3\libhowi\Filesystem\Commons\AbstractFilesystem;
 use \HOWI3\libhowi\Filesystem\Commons\FilesystemInterface;
 use \HOWI3\libhowi\Filesystem\Commons\SharedMethodsInterface;
 use \HOWI3\libhowi\Filesystem\Commons\TraitForResponse;
-use \HOWI3\libhowi\Filesystem\php5\Objects\DirectoryPlaceholderObject;
-use \HOWI3\libhowi\Filesystem\php5\Objects\DirectoryTreeObject;
-use \HOWI3\libhowi\Filesystem\php5\Objects\FileObject;
-use \HOWI3\libhowi\Filesystem\php5\Objects\InfoObject;
-use \HOWI3\libhowi\Filesystem\php5\Objects\TmpObject;
-use \HOWI3\libhowi\Filesystem\php5\Objects\LinkObject;
-use \HOWI3\libhowi\Filesystem\php5\TraitForFileSystem;
-use \HOWI3\libhowi\Filesystem\php5\TraitForSharedMethods;
+use \HOWI3\libhowi\Filesystem\php7\Objects\DirectoryPlaceholderObject;
+use \HOWI3\libhowi\Filesystem\php7\Objects\DirectoryTreeObject;
+use \HOWI3\libhowi\Filesystem\php7\Objects\FileObject;
+use \HOWI3\libhowi\Filesystem\php7\Objects\InfoObject;
+use \HOWI3\libhowi\Filesystem\php7\Objects\TmpObject;
+use \HOWI3\libhowi\Filesystem\php7\Objects\LinkObject;
+use \HOWI3\libhowi\Filesystem\php7\TraitForFileSystem;
+use \HOWI3\libhowi\Filesystem\php7\TraitForSharedMethods;
 
 class Filesystem extends AbstractFilesystem implements FilesystemInterface, SharedMethodsInterface
 {
@@ -94,8 +94,8 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
             }
             
             if ($this->dirs[$HID] instanceof DirectoryTreeObject) {
-                $this->dirs[$HID]->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject');
-                $this->dirs[$HID]->setInfoClass('\HOWI3\libhowi\Filesystem\php5\Objects\InfoObject');
+                $this->dirs[$HID]->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject');
+                $this->dirs[$HID]->setInfoClass('\HOWI3\libhowi\Filesystem\php7\Objects\InfoObject');
                 $this->dirs[$HID]->setLogFile($this->getLogFile());
                 $this->dirs[$HID]->setLogLevel($this->getLogLevel());
                 $this->dirs[$HID]->setUID($this->getUID());
@@ -108,8 +108,8 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
                 if ($this->isDir($dir)) {
                     
                     $this->dirs[$HID] = new DirectoryTreeObject($dir, DirectoryTreeObject::SKIP_DOTS);
-                    $this->dirs[$HID]->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject');
-                    $this->dirs[$HID]->setInfoClass('\HOWI3\libhowi\Filesystem\php5\Objects\InfoObject');
+                    $this->dirs[$HID]->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject');
+                    $this->dirs[$HID]->setInfoClass('\HOWI3\libhowi\Filesystem\php7\Objects\InfoObject');
                     $this->dirs[$HID]->setLogFile($this->getLogFile());
                     $this->dirs[$HID]->setLogLevel($this->getLogLevel());
                     $this->dirs[$HID]->setUID($this->getUID());
@@ -154,8 +154,8 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
         
         if ($this->exists($real)) {
             $this->files[$filename] = new FileObject($real, 'r+');
-            $this->files[$filename]->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject');
-            $this->files[$filename]->setInfoClass("\HOWI3\libhowi\Filesystem\php5\Objects\InfoObject");
+            $this->files[$filename]->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject');
+            $this->files[$filename]->setInfoClass("\HOWI3\libhowi\Filesystem\php7\Objects\InfoObject");
             $result = $this->files[$filename];
         }
         
@@ -189,8 +189,8 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
             $result = false;
         } elseif ($this->exists($real)) {
             $this->infos[$basename] = new InfoObject($real);
-            $this->infos[$basename]->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject');
-            $this->infos[$basename]->setInfoClass("\HOWI3\libhowi\Filesystem\php5\Objects\InfoObject");
+            $this->infos[$basename]->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject');
+            $this->infos[$basename]->setInfoClass("\HOWI3\libhowi\Filesystem\php7\Objects\InfoObject");
             $result = $this->infos[$basename];
         }
         return $result;

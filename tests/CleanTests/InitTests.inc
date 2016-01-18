@@ -66,12 +66,12 @@ class InitTest extends PHPUnit_Framework_TestCase
                 $this->assertTrue($this->FS->getStatus());
                 $this->assertEquals(702,$this->FS->getCode());
             }
-            $this->FS->dir('libhowi-filesystem', '~/.HOWI/tmp');
+            $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
             $this->assertTrue($this->FS->getStatus(), 'Failed to create test directory');
             
             $this->FS->dir('log', FS_TEST_LOCATION);
             $this->assertTrue($this->FS->getStatus(), 'Failed to create log directory');
-            $this->assertTrue($this->FS->isDir('~/.HOWI/tmp/libhowi-filesystem/log'));
+            $this->assertTrue($this->FS->isDir('~/HOWI3/tmp/libhowi-filesystem/log'));
             
             $this->FS->debug(8, 'Starting phpunit tests');
             
@@ -80,13 +80,13 @@ class InitTest extends PHPUnit_Framework_TestCase
     
     public function test_FS_instance()
     {
-        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\php5\Filesystem', FS::load());
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\FilesystemInterface', FS::load());
     }
     
     public function test_FS_load_with_non_existing_destination()
     {
         $FS = FS::load('../lets/try/to/go/some/randome/place/which/do/not/exist');
-        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\php5\Filesystem', $FS);
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\FilesystemInterface', $FS);
         $this->assertEquals(500, $FS->getCode(),
             "Starting Code must be int 500 if invalid destination is provided!");
     }
@@ -94,7 +94,7 @@ class InitTest extends PHPUnit_Framework_TestCase
     public function test_FS_load_with_true()
     {
         $FS = FS::load(true);
-        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\php5\Filesystem', $FS);
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\FilesystemInterface', $FS);
         $this->assertEquals(801, $FS->getCode(),
             "Starting Code must be 0 if true is provided the cwd will be directory containing the calling script!");
     }

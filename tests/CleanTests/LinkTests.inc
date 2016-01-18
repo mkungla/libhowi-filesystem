@@ -30,33 +30,33 @@ class LinkTests extends PHPUnit_Framework_TestCase
     public function test_link()
     {
         
-        $this->assertTrue($this->FS->link()->hardlink('~/.HOWI/tmp/libhowi-filesystem/documents/test_file.txt',
-            '~/.HOWI/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
+        $this->assertTrue($this->FS->link()->hardlink('~/HOWI3/tmp/libhowi-filesystem/documents/test_file.txt',
+            '~/HOWI3/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
         /* No hardlink on directories */
-        $this->assertFalse($this->FS->link()->hardlink('~/.HOWI/tmp/libhowi-filesystem/documents','~/.HOWI/tmp/libhowi-filesystem/documents-hl'));
+        $this->assertFalse($this->FS->link()->hardlink('~/HOWI3/tmp/libhowi-filesystem/documents','~/HOWI3/tmp/libhowi-filesystem/documents-hl'));
         
-        $this->assertTrue($this->FS->link()->symlink('~/.HOWI/tmp/libhowi-filesystem/documents/test_file.txt', 
-            '~/.HOWI/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
+        $this->assertTrue($this->FS->link()->symlink('~/HOWI3/tmp/libhowi-filesystem/documents/test_file.txt', 
+            '~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
     }
     
     public function test_lstat()
     {
-        $this->assertInternalType('array',$this->FS->link()->lstat('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
+        $this->assertInternalType('array',$this->FS->link()->lstat('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
     
-        $this->assertFalse($this->FS->link()->lstat('~/.HOWI/tmp/libhowi-filesystem/documents-hl'));
+        $this->assertFalse($this->FS->link()->lstat('~/HOWI3/tmp/libhowi-filesystem/documents-hl'));
     
     }
     
     public function test_lstatDiff()
     {
-        $this->assertInternalType('array',$this->FS->link()->lstatDiff('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
+        $this->assertInternalType('array',$this->FS->link()->lstatDiff('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_hardlink.txt'));
     
     
     }
     
     public function test_readlink()
     {
-        $this->assertInternalType('string',$this->FS->link()->readlink('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
+        $this->assertInternalType('string',$this->FS->link()->readlink('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
     }
     
     public function test_lchgrp()
@@ -64,20 +64,20 @@ class LinkTests extends PHPUnit_Framework_TestCase
        
         $this->assertFalse($this->FS->link()->lchgrp());
     
-        $this->assertTrue($this->FS->link()->lchgrp('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmygid()));
+        $this->assertTrue($this->FS->link()->lchgrp('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmygid()));
     }
     
     public function test_lchown()
     {
         $this->assertFalse($this->FS->link()->lchown());
-        $this->assertTrue($this->FS->link()->lchown('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmyuid()));
+        $this->assertTrue($this->FS->link()->lchown('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmyuid()));
     
     }
     
     public function test_linkinfo()
     {
         $this->assertFalse($this->FS->link()->linkinfo());
-        $this->assertInternalType('int',$this->FS->link()->linkinfo('~/.HOWI/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
+        $this->assertInternalType('int',$this->FS->link()->linkinfo('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt'));
     
     }
     public function test_functions()

@@ -4,11 +4,12 @@
 	beStrictAboutTestsThatDoNotTestAnything="true"
 	columns="67"
 	verbose="true"
-	topOnFailure="true">
+	stopOnError="true"
+	stopOnFailure="true">
 	<php>
 		<const name="FS_TEST_LOG_LEVEL" value="7"/>
-		<const name="FS_TEST_LOG_LOCATION" value="~/.HOWI/tmp/libhowi-filesystem/log/phpunit_test.log"/>
-		<const name="FS_TEST_LOCATION" value="~/.HOWI/tmp/libhowi-filesystem"/>
+		<const name="FS_TEST_LOG_LOCATION" value="~/HOWI3/tmp/libhowi-filesystem/log/phpunit_test.log"/>
+		<const name="FS_TEST_LOCATION" value="~/HOWI3/tmp/libhowi-filesystem"/>
 	</php>
 	<testsuites>
 		<testsuite name="InitTests">

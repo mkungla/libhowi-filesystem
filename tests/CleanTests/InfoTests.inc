@@ -43,7 +43,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
         $this->assertFalse($this->FS->getStatus());
         
         $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface', 
-            $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents'));
+            $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents'));
         $this->assertEquals(809, $this->FS->getCode());
         $this->assertFalse($this->FS->getStatus());
     }
@@ -51,7 +51,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getLinkTarget()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertFalse($this->FS->infoObject('test_file.txt')
             ->getLinkTarget());
@@ -60,9 +60,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getPath()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
-        $this->assertEquals(getenv('HOME') . '/.HOWI/tmp/libhowi-filesystem/documents',
+        $this->assertEquals(getenv('HOME') . '/HOWI3/tmp/libhowi-filesystem/documents',
             $this->FS->infoObject('test_file.txt')
             ->getPath(), 'Failed to assert getPath');
     }
@@ -70,25 +70,25 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getFilename()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertEquals('test_file.txt', $this->FS->infoObject('test_file.txt')
-            ->getFilename(), '~/.HOWI/tmp/libhowi-filesystem/log/phpunitTestLog.txt should be string txt');
+            ->getFilename(), '~/HOWI3/tmp/libhowi-filesystem/log/phpunitTestLog.txt should be string txt');
     }
     
     public function test_getExtension()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertEquals('txt', $this->FS->infoObject('test_file.txt')
-            ->getExtension(), '~/.HOWI/tmp/libhowi-filesystem/log/test_file.txt should be string txt');
+            ->getExtension(), '~/HOWI3/tmp/libhowi-filesystem/log/test_file.txt should be string txt');
     }
     
     public function test_getBasename()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertEquals('test_file.txt', $this->FS->infoObject('test_file.txt')
             ->getBasename());
@@ -97,9 +97,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getPathName()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
-        $this->assertEquals(getenv('HOME') . '/.HOWI/tmp/libhowi-filesystem/documents/test_file.txt',
+        $this->assertEquals(getenv('HOME') . '/HOWI3/tmp/libhowi-filesystem/documents/test_file.txt',
             $this->FS->infoObject('test_file.txt')
             ->getPathName(), 'Failed to assert getPathName');
     }
@@ -107,7 +107,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getPerms()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertEquals(664, $this->FS->infoObject('test_file.txt')
             ->getPerms(), ' permissions should be 664');
@@ -116,7 +116,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getInode()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
             ->getInode());
@@ -125,7 +125,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getSize()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
             ->getSize());
@@ -136,7 +136,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getOwner()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $userID = getmyuid();
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
@@ -148,7 +148,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getGroup()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $group = getmygid();
     
@@ -159,7 +159,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getATime()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
             ->getATime(), 'Default getAccessTime must be a int');
@@ -175,7 +175,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getMTime()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
             ->getMTime(), 'Default getModifTime must be a int');
@@ -191,7 +191,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getCTime()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
             ->getCTime(), 'Default getAccessTime must be a int');
@@ -207,7 +207,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getType()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInternalType('string', $this->FS->infoObject('test_file.txt')
             ->getType());
@@ -219,7 +219,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isWritable()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertTrue($this->FS->infoObject('test_file.txt')
             ->isWritable());
@@ -228,7 +228,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isReadable()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertTrue($this->FS->infoObject('test_file.txt')
             ->isReadable());
@@ -237,7 +237,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isExecutable()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertFalse($this->FS->infoObject('test_file.txt')
             ->isExecutable());
@@ -246,7 +246,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isFile()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertTrue($this->FS->infoObject('test_file.txt')
             ->isFile());
@@ -255,16 +255,16 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isDir()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertFalse($this->FS->infoObject('test_file.txt')
-            ->isDir(), '~/.HOWI/tmp/libhowi-filesystem/log/phpunitTestLog.txt');
+            ->isDir(), '~/HOWI3/tmp/libhowi-filesystem/log/phpunitTestLog.txt');
     }
     
     public function test_isLink()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         $this->assertFalse($this->FS->infoObject('test_file.txt')
             ->isLink());
     }
@@ -272,9 +272,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getRealPath()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
-        $this->assertEquals(getenv('HOME') . '/.HOWI/tmp/libhowi-filesystem/documents/test_file.txt',
+        $this->assertEquals(getenv('HOME') . '/HOWI3/tmp/libhowi-filesystem/documents/test_file.txt',
             $this->FS->infoObject('test_file.txt')
             ->getRealPath(), 'Failed to assert iterator getPath');
     }
@@ -282,7 +282,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getFileInfo()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface',
             $this->FS->infoObject('test_file.txt')
@@ -292,7 +292,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getPathInfo()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertInstanceOf('\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\InfoInterface',
             $this->FS->infoObject('test_file.txt')
@@ -302,7 +302,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_openFile()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
          
         $this->assertInstanceOF('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\FileInterface',
             $this->FS->infoObject('test_file.txt')
@@ -323,8 +323,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_setFileClass()
     {
     
-        $this->FS->file('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
+        
         $this->assertTrue(
             $this->FS->infoObject('test_file.txt')
             ->setFileClass('SplFileObject'));
@@ -333,15 +334,24 @@ class InfoTests extends PHPUnit_Framework_TestCase
             $this->FS->infoObject('test_file.txt')
             ->setFileClass('\SplFileObjectNonExisting'));
     
-        $this->assertTrue(
+        
+        if(PHP_VERSION_ID >= 70000)
+        {
+            $this->assertTrue(
+            $this->FS->infoObject('test_file.txt')
+            ->setFileClass('\HOWI3\libhowi\Filesystem\php7\Objects\FileObject'));
+        }
+        else {
+            $this->assertTrue(
             $this->FS->infoObject('test_file.txt')
             ->setFileClass('\HOWI3\libhowi\Filesystem\php5\Objects\FileObject'));
+        }
     }
     
     public function test_setInfoClass()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertTrue(
             $this->FS->infoObject('test_file.txt')
@@ -351,15 +361,24 @@ class InfoTests extends PHPUnit_Framework_TestCase
             $this->FS->infoObject('test_file.txt')
             ->setInfoClass('\SplFileInfoNonExisting'));
     
-        $this->assertTrue(
+        
+        if(PHP_VERSION_ID >= 70000)
+        {
+           $this->assertTrue(
+            $this->FS->infoObject('test_file.txt')
+            ->setInfoClass('\HOWI3\libhowi\Filesystem\php7\Objects\infoObject'));
+        }
+        else {
+           $this->assertTrue(
             $this->FS->infoObject('test_file.txt')
             ->setInfoClass('\HOWI3\libhowi\Filesystem\php5\Objects\infoObject'));
+        }
     }
     
     public function test___toString()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $expected_first_line = $this->FS->infoObject('test_file.txt')->getRealPath();
         $actual_first_line = $this->FS->infoObject('test_file.txt')->__toString();
@@ -370,7 +389,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getOwnerName()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $username = posix_getpwuid(getmyuid());
         $this->assertInternalType('string', $this->FS->infoObject('test_file.txt')
@@ -382,7 +401,7 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_getGroupName()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $group = posix_getgrgid(getmygid())['name'];
     
@@ -393,14 +412,14 @@ class InfoTests extends PHPUnit_Framework_TestCase
     public function test_isDot()
     {
     
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $this->assertFalse($this->FS->infoObject('test_file.txt')->isDot());
     }
     
     public function test_functions()
     {
-        $this->FS->infoObject('test_file.txt', '~/.HOWI/tmp/libhowi-filesystem/documents');
+        $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         
         $methods = get_class_methods($this->FS->infoObject('test_file.txt'));
         
