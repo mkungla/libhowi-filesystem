@@ -44,52 +44,12 @@
 			<file phpVersion="5.4.0"
 				phpVersionOperator=">=">CleanTests/FilesystemTests.inc</file>
 		</testsuite>
-		
-	<!-- 	<testsuite name="php5-GeneralTest">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/GeneralTest.inc</file>
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/FSTest.inc</file>
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/ResponseTraitTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-Conversion">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/TraitForConversionTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-DirectoryInterface">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/directoryObjectTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-FilesystemInterface">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/FilesystemInterfaceTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-FSIterator">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/directoryIteratorObjectTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-infoObjectInterfaceTest">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/infoObjectInterfaceTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-FSFileObjectInterface">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/fileObjectInterfaceTest.inc</file>
-		</testsuite>
-		<testsuite name="php5-Link">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/LinkTest.inc</file>
-		</testsuite> -->
-		<!-- <testsuite name="php5-LogTest">
-			<file phpVersion="5.4.0"
-				phpVersionOperator=">=">php5/LogTest.inc</file>
-		</testsuite> -->
 	</testsuites>
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory suffix=".inc">../Commons</directory>
 			<directory suffix=".inc">../php5</directory>
+			<directory suffix=".inc">../php7</directory>
 			<file>../bootstrap.inc</file>
 			<file>../FS.inc</file>
 		</whitelist>
