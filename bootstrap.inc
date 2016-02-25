@@ -42,4 +42,3 @@ function libhowi_autoloder($class = false)
 spl_autoload_register('libhowi_autoloder');
 
 
-
