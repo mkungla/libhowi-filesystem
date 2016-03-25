@@ -9,7 +9,7 @@
 		}
 	},
 	"require" : {
-		"okramlabs/olcpd-setup" : "^0"
+		"okramlabs/olcpd-setup" : "*"
 	},
 	"minimum-stability" : "alpha",
 	"config" : {
