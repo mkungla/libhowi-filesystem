@@ -442,10 +442,15 @@ EOD;
         $this->FS->file('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         
         $userID = getmyuid();
-        $this->assertInternalType('int', $this->FS->file('test_file.txt')
-            ->getOwner());
-        $this->assertEquals($userID, $this->FS->file('test_file.txt')
-            ->getOwner(), ' owner should match with current users ID');
+        if($userID) {
+            $this->assertInternalType('int', $this->FS->file('test_file.txt')
+                ->getOwner());
+            $this->assertEquals($userID, $this->FS->file('test_file.txt')
+                ->getOwner(), ' owner should match with current users ID');
+        } else {
+            $this->markTestSkipped();
+        }
+        
     }
 
     public function test_getGroup()
@@ -454,9 +459,12 @@ EOD;
         $this->FS->file('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         
         $group = getmygid();
-        
-        $this->assertEquals($group, $this->FS->file('test_file.txt')
-            ->getGroup(), ' group should match with current users group');
+        if($group) {
+            $this->assertEquals($group, $this->FS->file('test_file.txt')
+                ->getGroup(), ' group should match with current users group');
+        } else {
+            $this->markTestSkipped();
+        }
     }
 
     public function test_getATime()
@@ -684,10 +692,15 @@ EOD;
         $this->FS->file('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         
         $username = posix_getpwuid(getmyuid());
-        $this->assertInternalType('string', $this->FS->file('test_file.txt')
-            ->getOwnerName());
-        $this->assertEquals($username['name'], $this->FS->file('test_file.txt')
-            ->getOwnerName(), 'owners name should match with current users name');
+        if($username['name'] === 'root') {
+            $this->markTestSkipped();
+        } else {
+            $this->assertInternalType('string', $this->FS->file('test_file.txt')
+                ->getOwnerName());
+            $this->assertEquals($username['name'], $this->FS->file('test_file.txt')
+                ->getOwnerName(), 'owners name should match with current users name');
+        }
+        
     }
     
     public function test_getGroupName()
@@ -696,9 +709,12 @@ EOD;
         $this->FS->file('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
         
         $group = posix_getgrgid(getmygid())['name'];
-    
-        $this->assertEquals($group, $this->FS->file('test_file.txt')
-            ->getGroupName(), 'group should match with current users group');
+        if($group === 'root') {
+            $this->markTestSkipped();
+        } else {
+            $this->assertEquals($group, $this->FS->file('test_file.txt')
+                ->getGroupName(), 'group should match with current users group');
+        }
     }
     
     public function test_isDot()

@@ -8,10 +8,6 @@
 			"HOWI3\\libhowi\\Filesystem\\" : ""
 		}
 	},
-	"require" : {
-		"okramlabs/olcpd-setup" : "*"
-	},
-	"minimum-stability" : "alpha",
 	"config" : {
 		"optimize-autoloader" : true
 	},

@@ -256,9 +256,13 @@ interface FilesystemInterface
     public function getRealpathCacheSize();
 
     /**
-     * Closes DirectoryTrrObject for given basename
+     * Closes DirectoryTreeObject or FileObjects for given basename
      *
-     * @param string $keyword            
+     * While FileObjects are closed anyway automatically when FS gets destructed
+     * but you might close the file your self. For inctance when multithreading / tasking
+     *  
+     * @param string $keyword
+     * @return bool true|false
      */
     public function close($keyword = false);
 
@@ -273,11 +277,18 @@ interface FilesystemInterface
     public function touch($filename = false, $time = false, $atime = false);
 
     /**
-     * Returns all loaded basenames
+     * Returns all loaded directory keys
      *
      * @return array
      */
-    public function getDirkeys();
+    public function getDirKeys();
+    
+    /**
+     * Returns all loaded file keys
+     *
+     * @return array
+     */
+    public function getFileKeys();
     
     /**
      * Create a directory and file structure from custom array or

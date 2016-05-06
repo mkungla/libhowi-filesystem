@@ -120,7 +120,7 @@ class LinkObject implements LinkInterface
             return false;
         
         $link = $this->makeAbsolute($link);
-        return lchgrp($link, $group);
+        return @lchgrp($link, $group);
     }
 
     /**
@@ -134,7 +134,7 @@ class LinkObject implements LinkInterface
             return false;
         
         $link = $this->makeAbsolute($link);
-        return lchown($link, $group);
+        return @lchown($link, $group);
     }
 
     /**
