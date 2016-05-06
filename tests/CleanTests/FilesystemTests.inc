@@ -174,7 +174,12 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->FS->getUID());
         
         $this->FS->setUID(getmyuid());
-        $this->assertEquals(getmyuid(), $this->FS->getUID());
+        if(getmyuid()) {
+            $this->assertEquals(getmyuid(), $this->FS->getUID());
+        } else {
+            $this->markTestIncomplete();
+        }
+        
     }
 
     public function test_getTime()
@@ -357,11 +362,16 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     public function test_chgrp()
     {
         // chgrp($filename = false, $group = false);
-        $this->assertFalse(
-            $this->FS->chgrp(FS_TEST_LOG_LOCATION . DIRECTORY_SEPARATOR . 'nondir', getmygid()), 
-            'Changing group of non existing source should return false');
-        $this->assertTrue($this->FS->chgrp(FS_TEST_LOG_LOCATION, getmygid()), 
-            'Changing group is not alloed for your user');
+        if(getmygid()) {
+            $this->assertFalse(
+                $this->FS->chgrp(FS_TEST_LOG_LOCATION . DIRECTORY_SEPARATOR . 'nondir', getmygid()),
+                'Changing group of non existing source should return false');
+            $this->assertTrue($this->FS->chgrp(FS_TEST_LOG_LOCATION, getmygid()),
+                'Changing group is not alloed for your user');
+        } else {
+            $this->markTestSkipped();
+        }
+        
     }
 
     public function test_chmod()
@@ -376,11 +386,16 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     public function test_chown()
     {
         // chown($filename = false, $user = false);
-        $this->assertFalse(
-            $this->FS->chown(FS_TEST_LOG_LOCATION . DIRECTORY_SEPARATOR . 'nondir', getmyuid()), 
-            'Changing user of non existing source should return false');
-        $this->assertTrue($this->FS->chown(FS_TEST_LOG_LOCATION, getmyuid()), 
-            'Changing user is not alloed for your user');
+        if(getmyuid()) {
+            $this->assertFalse(
+                $this->FS->chown(FS_TEST_LOG_LOCATION . DIRECTORY_SEPARATOR . 'nondir', getmyuid()),
+                'Changing user of non existing source should return false');
+            $this->assertTrue($this->FS->chown(FS_TEST_LOG_LOCATION, getmyuid()),
+                'Changing user is not alloed for your user');
+        } else {
+            $this->markTestSkipped();
+        }
+        
     }
 
     public function test_clearstatcache()
@@ -463,13 +478,20 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
     public function test_close()
     {
+        // Close directory
         $this->FS->dir('log', FS_TEST_LOCATION);
-        
-        $this->assertArrayHasKey('log', $this->FS->getDirkeys());
+        $this->assertArrayHasKey('log', $this->FS->getDirKeys());
         
         $this->FS->close('log');
+        $this->assertArrayNotHasKey('log', $this->FS->getDirKeys());
         
-        $this->assertArrayNotHasKey('log', $this->FS->getDirkeys());
+        // Close file
+        $this->assertInstanceOf('HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\FileInterface',
+            $this->FS->file('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents'));
+        
+        $this->assertArrayHasKey('test_file.txt', $this->FS->getFileKeys());
+        $this->FS->close('test_file.txt');
+        $this->assertArrayNotHasKey('test_file.txt', $this->FS->getFileKeys());
     }
 
     public function test_touch()
@@ -604,16 +626,26 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         $username = posix_getpwuid(getmyuid());
         $this->assertInternalType('string', $this->FS->getOwnerName(FS_TEST_LOCATION));
-        $this->assertEquals($username['name'], $this->FS->getOwnerName(FS_TEST_LOCATION));
         $this->assertFalse($this->FS->getOwnerName());
+        
+        if($username['name'] !== 'root')
+            $this->assertEquals($username['name'], $this->FS->getOwnerName(FS_TEST_LOCATION));
+        else 
+            $this->markTestIncomplete();
+        
     }
 
     public function test_getGroupName()
     {
         $group = posix_getgrgid(getmygid())['name'];
         
-        $this->assertEquals($group, $this->FS->getGroupName(FS_TEST_LOCATION), 
-            FS_TEST_LOCATION . ' group should match with current users group');
+        if($group !== 'root') {
+            $this->assertEquals($group, $this->FS->getGroupName(FS_TEST_LOCATION),
+                FS_TEST_LOCATION . ' group should match with current users group');
+        } else {
+            $this->markTestIncomplete();
+        }
+        
         
         $this->assertFalse($this->FS->getGroupName());
     }
@@ -649,20 +681,29 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
     public function test_getGroup()
     {
-        $group = getmygid();
-        
-        $this->assertEquals($group, $this->FS->getGroup(FS_TEST_LOCATION), 
-            '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
         $this->assertFalse($this->FS->getGroup());
+        
+        $group = getmygid();
+        if($group) {
+            $this->assertEquals($group, $this->FS->getGroup(FS_TEST_LOCATION),
+                '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
+        } else {
+            $this->markTestIncomplete();
+        }
     }
 
     public function test_getOwner()
     {
-        $userID = getmyuid();
-        $this->assertInternalType('int', $this->FS->getOwner(FS_TEST_LOCATION));
-        $this->assertEquals($userID, $this->FS->getOwner(FS_TEST_LOCATION), 
-            '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
         $this->assertFalse($this->FS->getOwner());
+        $this->assertInternalType('int', $this->FS->getOwner(FS_TEST_LOCATION));
+        
+        $userID = getmyuid();
+        if($userID) {
+            $this->assertEquals($userID, $this->FS->getOwner(FS_TEST_LOCATION),
+            '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
+        } else {
+            $this->markTestIncomplete();
+        }
     }
 
     public function test_getInode()
@@ -836,7 +877,8 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
                 'setStatus', // --"--
                 'getCode', // tested by $this->test_get_set_Code()
                 'setCode', // --"--
-                'getDirkeys'
+                'getDirKeys',
+                'getFileKeys'
             ); // Tested by $this->test_close()
                // --"--
             

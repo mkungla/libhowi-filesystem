@@ -561,12 +561,7 @@ trait TraitForSharedMethods
         elseif (! empty($path) && $this->isRelative($path)) {
             
             if (preg_match('/^(~\/)/', $path) === 1) {
-                
-                $userinfo = posix_getpwuid(getmyuid());
-                
-                if (array_key_exists('dir', $userinfo)) {
-                    $absolute_path = $userinfo['dir'] . substr($path, 1);
-                }
+                $absolute_path = getenv("HOME") . substr($path, 1);
             } elseif (preg_match('/^(.\/|..\/)/', $path) === 1) {
                 $absolute_path = realpath($path);
             } else

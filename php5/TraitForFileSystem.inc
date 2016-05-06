@@ -363,6 +363,12 @@ trait TraitForFileSystem
              array_key_exists($this->dirkeys[$keyword], $this->dirs)) {
             unset($this->dirs[$this->dirkeys[$keyword]]);
             unset($this->dirkeys[$keyword]);
+        } elseif(!empty($keyword) && array_key_exists($keyword,$this->files)) {
+            $this->files[$keyword] = null;
+            unset($this->files[$keyword]);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -389,11 +395,21 @@ trait TraitForFileSystem
      * {@inheritDoc}
      *
      */
-    public function getDirkeys()
+    public function getDirKeys()
     {
         return $this->dirkeys;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     *
+     */
+    public function getFileKeys()
+    {
+        return $this->files;
+    }
+    
     /**
      *
      * {@inheritDoc}
