@@ -11,9 +11,9 @@ php:
 before_script:
   - pip install --user codecov
   - mkdir -p ~/tmp
-  
+  - cd /home/travis/build/mkungla/libhowi-filesystem/tests
 script:
-  - phpunit -c tests/phpunit.xml
+  - phpunit
   
 after_success:
   - codecov
