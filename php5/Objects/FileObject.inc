@@ -46,7 +46,7 @@ class FileObject extends SplFileObject implements FileInterface
      * {@inheritDoc}
      *
      */
-     public function flock($operation, &$wouldblock = NULL)
+    public function flock($operation, &$wouldblock = NULL)
     {
         return ! $wouldblock ? parent::flock($operation) : parent::flock($operation, $wouldblock);
     }

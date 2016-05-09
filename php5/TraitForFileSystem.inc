@@ -363,6 +363,7 @@ trait TraitForFileSystem
              array_key_exists($this->dirkeys[$keyword], $this->dirs)) {
             unset($this->dirs[$this->dirkeys[$keyword]]);
             unset($this->dirkeys[$keyword]);
+            return true;
         } elseif(!empty($keyword) && array_key_exists($keyword,$this->files)) {
             $this->files[$keyword] = null;
             unset($this->files[$keyword]);

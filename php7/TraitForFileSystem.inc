@@ -400,7 +400,7 @@ trait TraitForFileSystem
     {
         return $this->dirkeys;
     }
-    
+
     /**
      *
      * {@inheritDoc}
