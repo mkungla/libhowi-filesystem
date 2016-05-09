@@ -35,8 +35,10 @@ class DirectoryPlaceholderObject extends Directory implements DirectoryPlacehold
     use TraitForResponse;
     use TraitForSharedMethods;
 
-    private $path = '';
-
+    public $path = '';
+    
+    public $handle;
+    
     private $mode = 750;
 
     private $recursive = true;
