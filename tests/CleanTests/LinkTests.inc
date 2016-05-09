@@ -63,26 +63,14 @@ class LinkTests extends PHPUnit_Framework_TestCase
     {
        
         $this->assertFalse($this->FS->link()->lchgrp());
-        
-        $userID = getmyuid();
-        if($userID) {
-            $this->assertTrue($this->FS->link()->lchgrp('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmygid()));
-        } else {
-            $this->markTestIncomplete();
-        }
-        
+    
+        $this->assertTrue($this->FS->link()->lchgrp('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmygid()));
     }
     
     public function test_lchown()
     {
-        $userID = getmyuid();
-        if($userID) {
-            $this->assertFalse($this->FS->link()->lchown());
-            $this->assertTrue($this->FS->link()->lchown('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmyuid()));
-        } else {
-            $this->markTestSkipped();
-        }
-        
+        $this->assertFalse($this->FS->link()->lchown());
+        $this->assertTrue($this->FS->link()->lchown('~/HOWI3/tmp/libhowi-filesystem/documents/test_file_symlink.txt',getmyuid()));
     
     }
     

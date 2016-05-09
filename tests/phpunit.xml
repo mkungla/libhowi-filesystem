@@ -3,9 +3,7 @@
 	printerFile="tests/results/ResultPrinter.php"
 	beStrictAboutTestsThatDoNotTestAnything="true"
 	columns="67"
-	verbose="true"
-	stopOnError="true"
-	stopOnFailure="true">
+	verbose="true">
 	<php>
 		<const name="FS_TEST_LOG_LEVEL" value="7"/>
 		<const name="FS_TEST_LOG_LOCATION" value="~/HOWI3/tmp/libhowi-filesystem/log/phpunit_test.log"/>

@@ -139,14 +139,10 @@ class InfoTests extends PHPUnit_Framework_TestCase
         $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $userID = getmyuid();
-        if(empty($userID)) {
-            $this->markTestSkipped();
-        } else {
-            $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
-                ->getOwner());
-            $this->assertEquals($userID, $this->FS->infoObject('test_file.txt')
-                ->getOwner(), ' owner should match with current users ID');
-        }
+        $this->assertInternalType('int', $this->FS->infoObject('test_file.txt')
+            ->getOwner());
+        $this->assertEquals($userID, $this->FS->infoObject('test_file.txt')
+            ->getOwner(), ' owner should match with current users ID');
     }
     
     public function test_getGroup()
@@ -155,12 +151,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
         $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $group = getmygid();
-        if($group) {
-            $this->assertEquals($group, $this->FS->infoObject('test_file.txt')
-                ->getGroup(), ' group should match with current users group');
-        } else {
-            $this->markTestSkipped();
-        }
+    
+        $this->assertEquals($group, $this->FS->infoObject('test_file.txt')
+            ->getGroup(), ' group should match with current users group');
     }
     
     public function test_getATime()
@@ -399,16 +392,10 @@ class InfoTests extends PHPUnit_Framework_TestCase
         $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $username = posix_getpwuid(getmyuid());
-        if($username['name'] === 'root') {
-            $this->markTestSkipped();
-            
-        } else {
-            $this->assertInternalType('string', $this->FS->infoObject('test_file.txt')
-                ->getOwnerName());
-            $this->assertEquals($username['name'], $this->FS->infoObject('test_file.txt')
-                ->getOwnerName(), 'owners name should match with current users name');
-        }
-        
+        $this->assertInternalType('string', $this->FS->infoObject('test_file.txt')
+            ->getOwnerName());
+        $this->assertEquals($username['name'], $this->FS->infoObject('test_file.txt')
+            ->getOwnerName(), 'owners name should match with current users name');
     }
     
     public function test_getGroupName()
@@ -417,12 +404,9 @@ class InfoTests extends PHPUnit_Framework_TestCase
         $this->FS->infoObject('test_file.txt', '~/HOWI3/tmp/libhowi-filesystem/documents');
     
         $group = posix_getgrgid(getmygid())['name'];
-        if($group == 'root') {
-            $this->markTestSkipped();
-        } else {
-            $this->assertEquals($group, $this->FS->infoObject('test_file.txt')
-                ->getGroupName(), 'group should match with current users group');
-        }
+    
+        $this->assertEquals($group, $this->FS->infoObject('test_file.txt')
+            ->getGroupName(), 'group should match with current users group');
     }
     
     public function test_isDot()

@@ -174,12 +174,7 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, $this->FS->getUID());
         
         $this->FS->setUID(getmyuid());
-        if(getmyuid()) {
-            $this->assertEquals(getmyuid(), $this->FS->getUID());
-        } else {
-            $this->markTestIncomplete();
-        }
-        
+        $this->assertEquals(getmyuid(), $this->FS->getUID());
     }
 
     public function test_getTime()
@@ -480,7 +475,8 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         // Close directory
         $this->FS->dir('log', FS_TEST_LOCATION);
-        $this->assertArrayHasKey('log', $this->FS->getDirKeys());
+        
+        $this->assertArrayHasKey('log', $this->FS->getDirkeys());
         
         $this->FS->close('log');
         $this->assertArrayNotHasKey('log', $this->FS->getDirKeys());
@@ -626,26 +622,16 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
     {
         $username = posix_getpwuid(getmyuid());
         $this->assertInternalType('string', $this->FS->getOwnerName(FS_TEST_LOCATION));
+        $this->assertEquals($username['name'], $this->FS->getOwnerName(FS_TEST_LOCATION));
         $this->assertFalse($this->FS->getOwnerName());
-        
-        if($username['name'] !== 'root')
-            $this->assertEquals($username['name'], $this->FS->getOwnerName(FS_TEST_LOCATION));
-        else 
-            $this->markTestIncomplete();
-        
     }
 
     public function test_getGroupName()
     {
         $group = posix_getgrgid(getmygid())['name'];
         
-        if($group !== 'root') {
-            $this->assertEquals($group, $this->FS->getGroupName(FS_TEST_LOCATION),
-                FS_TEST_LOCATION . ' group should match with current users group');
-        } else {
-            $this->markTestIncomplete();
-        }
-        
+        $this->assertEquals($group, $this->FS->getGroupName(FS_TEST_LOCATION), 
+            FS_TEST_LOCATION . ' group should match with current users group');
         
         $this->assertFalse($this->FS->getGroupName());
     }
@@ -681,29 +667,20 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
 
     public function test_getGroup()
     {
-        $this->assertFalse($this->FS->getGroup());
-        
         $group = getmygid();
-        if($group) {
-            $this->assertEquals($group, $this->FS->getGroup(FS_TEST_LOCATION),
-                '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
-        } else {
-            $this->markTestIncomplete();
-        }
+        
+        $this->assertEquals($group, $this->FS->getGroup(FS_TEST_LOCATION), 
+            '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
+        $this->assertFalse($this->FS->getGroup());
     }
 
     public function test_getOwner()
     {
-        $this->assertFalse($this->FS->getOwner());
-        $this->assertInternalType('int', $this->FS->getOwner(FS_TEST_LOCATION));
-        
         $userID = getmyuid();
-        if($userID) {
-            $this->assertEquals($userID, $this->FS->getOwner(FS_TEST_LOCATION),
+        $this->assertInternalType('int', $this->FS->getOwner(FS_TEST_LOCATION));
+        $this->assertEquals($userID, $this->FS->getOwner(FS_TEST_LOCATION), 
             '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
-        } else {
-            $this->markTestIncomplete();
-        }
+        $this->assertFalse($this->FS->getOwner());
     }
 
     public function test_getInode()

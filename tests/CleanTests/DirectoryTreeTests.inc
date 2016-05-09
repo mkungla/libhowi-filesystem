@@ -84,13 +84,13 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->FS->dir('log')
             ->hasChildren(), 'log has children');
         
-        $this->assertEquals('images', $this->FS->dir('libhowi-filesystem')
+        $this->assertEquals('log', $this->FS->dir('libhowi-filesystem')
             ->getBasename());
         
         /* Our pointer should be on videos dir after seek(3) | next */
         $this->FS->dir('libhowi-filesystem')->next();
         
-        $this->assertEquals('documents', $this->FS->dir('libhowi-filesystem')
+        $this->assertEquals('videos', $this->FS->dir('libhowi-filesystem')
             ->getBasename());
         $this->assertTrue($this->FS->dir('libhowi-filesystem')
             ->hasChildren(), 
@@ -126,7 +126,7 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
                 ->getChildren());
         
         $from_c = $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp')
-            ->c('images')
+            ->c('log')
             ->getBasename();
         /* As we revind our first item will be log */
         $this->FS->dir('libhowi-filesystem')->rewind();
@@ -333,15 +333,10 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $userID = getmyuid();
-        if($userID) {
-            $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
-                ->getOwner());
-            $this->assertEquals($userID, $this->FS->dir('libhowi-filesystem')
-                ->getOwner(), '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
-        } else {
-            $this->markTestSkipped();
-        }
-        
+        $this->assertInternalType('int', $this->FS->dir('libhowi-filesystem')
+            ->getOwner());
+        $this->assertEquals($userID, $this->FS->dir('libhowi-filesystem')
+            ->getOwner(), '~/HOWI3/tmp/libhowi-filesystem owner should match with current users ID');
     }
 
     public function test_getGroup()
@@ -357,6 +352,8 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
             $this->markTestSkipped();
         }
         
+        $this->assertEquals($group, $this->FS->dir('libhowi-filesystem')
+            ->getGroup(), '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
     }
 
     public function test_getATime()
@@ -705,16 +702,10 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $username = posix_getpwuid(getmyuid())['name'];
-        
-        if($username == 'root') {
-            $this->markTestSkipped();
-        } else {
-            $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
-                ->getOwnerName());
-            $this->assertEquals($username, $this->FS->dir('libhowi-filesystem')
-                ->getOwnerName(), '~/HOWI3/tmp/libhowi-filesystem owners name should match with current users name');
-        }
-        
+        $this->assertInternalType('string', $this->FS->dir('libhowi-filesystem')
+            ->getOwnerName());
+        $this->assertEquals($username, $this->FS->dir('libhowi-filesystem')
+            ->getOwnerName(), '~/HOWI3/tmp/libhowi-filesystem owners name should match with current users name');
     }
     
     public function test_getGroupName()
@@ -723,13 +714,9 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp');
         
         $group = posix_getgrgid(getmygid())['name'];
-        if($group == 'root') {
-            $this->markTestSkipped();
-        } else {
-            $this->assertEquals($group, $this->FS->dir('libhowi-filesystem')
-                ->getGroupName(), '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
-        }
-        
+    
+        $this->assertEquals($group, $this->FS->dir('libhowi-filesystem')
+            ->getGroupName(), '~/HOWI3/tmp/libhowi-filesystem group should match with current users group');
     }
     
     public function test_isDot()
