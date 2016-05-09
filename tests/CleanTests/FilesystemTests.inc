@@ -488,6 +488,12 @@ class FilesystemTests extends PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('test_file.txt', $this->FS->getFileKeys());
         $this->FS->close('test_file.txt');
         $this->assertArrayNotHasKey('test_file.txt', $this->FS->getFileKeys());
+        
+        // Closes nothing
+        $this->assertFalse($this->FS->close());
+        
+        // non existing key
+        $this->assertFalse($this->FS->close('non-ex'));
     }
 
     public function test_touch()
