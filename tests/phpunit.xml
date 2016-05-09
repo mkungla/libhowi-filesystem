@@ -11,35 +11,35 @@
 	</php>
 	<testsuites>
 		<testsuite name="InitTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/InitTests.inc</file>
 		</testsuite>
 		<testsuite name="DirectoryTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/DirectoryTests.inc</file>
 		</testsuite>
 		<testsuite name="DirectoryTreeTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/DirectoryTreeTests.inc</file>
 		</testsuite>
 		<testsuite name="FileTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/FileTests.inc</file>
 		</testsuite>
 		<testsuite name="InfoTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/InfoTests.inc</file>
 		</testsuite>
 		<testsuite name="TmpTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/TmpTests.inc</file>
 		</testsuite>
 		<testsuite name="TmpTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/LinkTests.inc</file>
 		</testsuite>
 		<testsuite name="FilesystemTests">
-			<file phpVersion="5.4.0"
+			<file phpVersion="5.5.11"
 				phpVersionOperator=">=">CleanTests/FilesystemTests.inc</file>
 		</testsuite>
 	</testsuites>

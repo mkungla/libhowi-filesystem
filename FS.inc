@@ -48,9 +48,9 @@ class FS
             $ser_cwd_by_caller = dirname($cwd_caller['file']);
         }
         /**
-         * Minimum version of PHP must be atleast 5.4
+         * Minimum version of PHP must be atleast 5.5.11
          */
-        if ($PHP_VERSION_ID <= 50400)
+        if ($PHP_VERSION_ID <= 50511)
             return call_user_func(
                 function () {
                     $self = new self();

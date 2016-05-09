@@ -66,6 +66,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
      */
     public function dir($directory = false, $dirname = false, $recursive = true, $mode = false, $context = false)
     {
+        $response = null;
         if (empty($directory)) {
             return false;
         }
@@ -116,6 +117,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
             
             $response = $this->dirs[$HID];
         }
+        
         return $response;
     }
 

@@ -128,13 +128,8 @@ class DirectoryTreeTests extends PHPUnit_Framework_TestCase
         $from_c = $this->FS->dir('libhowi-filesystem', '~/HOWI3/tmp')
             ->c('log')
             ->getBasename();
-        /* As we revind our first item will be log */
-        $this->FS->dir('libhowi-filesystem')->rewind();
-        $from_child = $this->FS->dir('libhowi-filesystem')
-            ->getChildren()
-            ->getBasename();
-        
-        $this->assertEquals($from_c, $from_child);
+       
+        $this->assertEquals($from_c, 'phpunit_test.log');
     }
 
     public function test_getSubPath()
