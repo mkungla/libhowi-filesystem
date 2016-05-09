@@ -124,7 +124,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
      * {@inheritDoc}
      *
      */
-    public function file($filename = false, $dirname = false, $data = '', $flags = FILE_APPEND | LOCK_EX, $context = null)
+    public function file($filename = false, $dirname = false, $data = '', $flags = FILE_APPEND, $context = null)
     {
         if (! empty($filename) && array_key_exists($filename, $this->files) &&
              is_object($this->files[$filename]))
