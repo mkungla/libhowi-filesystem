@@ -164,9 +164,7 @@ class DirectoryTests extends PHPUnit_Framework_TestCase
     public function test_load_cwd()
     {
         
-        $this->assertFalse(
-            '\HOWI3\libhowi\Filesystem\Commons\ObjectInterfaces\DirectoryTreeInterface',
-            $this->FS->dir());
+        $this->assertFalse($this->FS->dir());
         $this->assertTrue($this->FS->getStatus());
         $this->assertEquals(801, $this->FS->getCode());
     }
