@@ -192,7 +192,8 @@ trait TraitForResponse
         $this->response->setContext($context);
         $this->response->setLevel($LEVEL);
         
-        if (! empty($this->getLogFile()) && ! empty($to_file))
+        $logging = $this->getLogFile();
+        if (! empty($logging) && ! empty($to_file))
             $this->logToFile($LEVEL);
     }
 
@@ -209,9 +210,10 @@ trait TraitForResponse
         $message .= '[code] ' . str_pad($this->getCode(), 5, " ", STR_PAD_RIGHT) . ' [/code]';
         $message .= '[msg] ' . $this->getMsg() . ' [/msg]' . "\n";
         
-        if (! is_dir(dirname($this->getLogFile())))
+        $logging = $this->getLogFile();
+        if (empty($logging) || ! is_dir(dirname($logging)))
             return false;
-        return file_put_contents($this->getLogFile(), $message, FILE_APPEND);
+        return file_put_contents($logging, $message, FILE_APPEND);
     }
 
     /**
