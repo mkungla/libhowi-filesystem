@@ -67,10 +67,7 @@ class Filesystem extends AbstractFilesystem implements FilesystemInterface, Shar
     public function dir($directory = false, $dirname = false, $recursive = true, $mode = false, $context = false)
     {
         if (empty($directory)) {
-            $directory = basename($this->getCwd());
-            $dirname = dirname($this->getCwd());
-            
-            return $this->dir('CWD', $dirname);
+            return false;
         }
         // ///////////
         $this->debug(807);
