@@ -188,7 +188,7 @@ interface FileInterface
     /**
      * Reads the given number or all of bytes from the file.
      *
-     * @param string $length
+     * @param int $length
      *            The number of bytes to read.
      * @return string|bool Returns the string read from the file or FALSE on failure.
      */

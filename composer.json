@@ -3,6 +3,9 @@
 	"description" : "PHP filesystem",
 	"type" : "libhowi-filesystem",
 	"license" : "MIT",
+	"require": {
+        "php": ">=5.5.11"
+    },
 	"autoload" : {
 		"psr-4" : {
 			"HOWI3\\libhowi\\Filesystem\\" : ""
