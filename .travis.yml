@@ -10,6 +10,7 @@ php:
   
 before_script:
   - pip install --user codecov
+  - mkdir -p ~/tmp
   
 script:
   - phpunit -c tests/phpunit.xml
