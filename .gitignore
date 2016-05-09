@@ -1,3 +1,4 @@
 tests/phpunit/*
+tests/text
 composer.phar
 vendor/
