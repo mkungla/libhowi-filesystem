@@ -359,7 +359,7 @@ trait TraitForFileSystem
      */
     public function close($keyword = false)
     {
-        if (array_key_exists($keyword, $this->dirkeys) &&
+        if (!empty($keyword) && array_key_exists($keyword, $this->dirkeys) &&
              array_key_exists($this->dirkeys[$keyword], $this->dirs)) {
             unset($this->dirs[$this->dirkeys[$keyword]]);
             unset($this->dirkeys[$keyword]);
