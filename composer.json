@@ -1,5 +1,5 @@
 {
-	"name" : "okramlabs/libhowi-filesystem",
+	"name" : "mkungla/libhowi-filesystem",
 	"description" : "PHP filesystem",
 	"type" : "libhowi-filesystem",
 	"license" : "MIT",
@@ -11,7 +11,7 @@
 	"config" : {
 		"optimize-autoloader" : true
 	},
-	"homepage" : "https://github.com/okramlabs/libhowi-filesystem",
+	"homepage" : "https://github.com/mkungla/libhowi-filesystem",
 	"authors" : [{
 			"name" : "Marko Kungla",
 			"email" : "marko@okramlabs.com",
@@ -20,12 +20,15 @@
 		}
 	],
 	"support" : {
-		"issues" : "https://github.com/okramlabs/libhowi-filesystem/issues",
-		"source" : "https://github.com/okramlabs/libhowi-filesystem"
+		"issues" : "https://github.com/mkungla/libhowi-filesystem/issues",
+		"source" : "https://github.com/mkungla/libhowi-filesystem"
 	},
 	"keywords" : [
 		"php",
 		"filesystem",
 		"HOWI3"
-	]
+	],
+	"replace": {
+        "okramlabs/libhowi-filesystem": "<1"
+    }
 }
