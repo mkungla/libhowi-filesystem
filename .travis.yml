@@ -10,7 +10,7 @@ before_script:
   - mkdir -p ~/tmp
   - cd /home/travis/build/mkungla/libhowi-filesystem/tests
 script:
-  - phpunit
+  - phpunit --coverage-text --coverage-clover="../coverage.clover"
   
 after_success:
   - bash <(curl -s https://codecov.io/bash)
